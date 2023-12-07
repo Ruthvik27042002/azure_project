@@ -24,8 +24,7 @@ jobs:
       - name: Install dependencies and fix npm audit issues
         run: |
           cd element-main/backend
-          npm install
-          npm audit fix --force
+          npm install -y
 
       - name: Run tests
         run: npm tests
