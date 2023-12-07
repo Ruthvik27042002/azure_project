@@ -11,28 +11,29 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v2
 
-      - name: Set up Node.js version
+      - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: '20.x'
+          node-version: '14.x'
 
       - name: Change directory to element-main/backend
         run: cd element-main/backend
 
-      - name: npm install, build, and test
+      - name: Install dependencies and fix npm audit issues
         run: |
-          cd element-main/backend/
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm audit fix --force
+
+      - name: Run tests
+        run: npm test
 
       - name: Zip artifact for deployment
         run: zip ../../release.zip ./* -r
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: node-app
           path: ../../release.zip
@@ -46,7 +47,7 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v2
         with:
           name: node-app
 
