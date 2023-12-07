@@ -27,7 +27,9 @@ jobs:
           npm install -y
 
       - name: Run tests
-        run: node index.js
+        run: |
+          cd element-main/backend
+          node index.js
 
       - name: Zip artifact for deployment
         run: zip ../../release.zip ./* -r
