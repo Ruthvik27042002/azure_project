@@ -25,6 +25,10 @@ jobs:
         run: |
           cd element-main/backend
           npm install -y
+      - name: Run Node.js server in the background
+        run: |
+          cd element-main/backend
+          node index.js &
 
       - name: Zip artifact for deployment
         run: zip release.zip ./* -r
