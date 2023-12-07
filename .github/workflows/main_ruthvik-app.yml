@@ -19,7 +19,7 @@ jobs:
           node-version: '20.x'
 
       - name: Change directory to element-main
-        run: cd element-main
+        run: cd element-main/backend
 
       - name: npm install, build, and test
         run: |
